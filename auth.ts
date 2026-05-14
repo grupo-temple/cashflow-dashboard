@@ -7,10 +7,10 @@ export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
   trustedOrigins: [
     "http://localhost:3000",
-    ...(process.env.BETTER_AUTH_URL
-      ? [process.env.BETTER_AUTH_URL.replace(/\/$/, "")]
-      : []),
     "https://cashflow-dashboard-nine-red.vercel.app",
+    ...(process.env.BETTER_AUTH_TRUSTED_ORIGINS
+      ? process.env.BETTER_AUTH_TRUSTED_ORIGINS.split(",")
+      : []),
   ],
   database: drizzleAdapter(getDb(), {
     provider: "sqlite",
